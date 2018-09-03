@@ -52,7 +52,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-#include <conio.h>
+#include "conio.h"
 // Declaração das Bibliotecas de Funções de Integração
 #include "integ_trapz.h"
 

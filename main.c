@@ -1,24 +1,24 @@
 /********************************************************************************
 
-	BLOCKSIM é um programa limitado que realiza algumas simulações de 
-	sistemas dinâmicos que podem ser representados por diagramas de blocos.
+	BLOCKSIM eh um programa limitado que realiza algumas simulacoees de 
+	sistemas dinamicos que podem ser representados por diagramas de blocos.
     Copyright (C) 2004, Renato Mikio Nakagomi
 
-    Este arquivo é parte do programa BLOCKSIM
+    Este arquivo eh parte do programa BLOCKSIM
 
-    Este programa é software livre; você pode redistribuí-lo e/ou
-    modificá-lo sob os termos da Licença Pública Geral GNU, conforme
+    Este programa eh software livre; voce pode redistribui-lo e/ou
+    modifica-lo sob os termos da Licença Pública Geral GNU, conforme
     publicada pela Free Software Foundation; tanto a versão 2 da
-    Licença como (a seu critério) qualquer versão mais nova.
+    Licença como (a seu criterio) qualquer versao mais nova.
 
-    Este programa é distribuído na expectativa de ser útil, mas SEM
-    QUALQUER GARANTIA; sem mesmo a garantia implícita de
-    COMERCIALIZAÇÃO ou de ADEQUAÇÃO A QUALQUER PROPÓSITO EM
-    PARTICULAR. Consulte a Licença Pública Geral GNU para obter mais
+    Este programa eh distribuido na expectativa de ser util, mas SEM
+    QUALQUER GARANTIA; sem mesmo a garantia implicita de
+    COMERCIALIZACAO ou de ADEQUACAO A QUALQUER PROPOSITO EM
+    PARTICULAR. Consulte a Licenca Publica Geral GNU para obter mais
     detalhes.
  
-    Você deve ter recebido uma cópia da Licença Pública Geral GNU
-    junto com este programa; se não, escreva para a Free Software
+    Voce deve ter recebido uma copia da Licenca Publica Geral GNU
+    junto com este programa; se nao, escreva para a Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
     02111-1307, USA.
 
@@ -45,7 +45,7 @@
 
 ********************************************************************************
 	Renato Mikio Nakagomi
-	renato.nakagomi@poli.usp.br
+	rmikio@gmail.com
 ********************************************************************************/
 
 #include <stdio.h>
@@ -53,22 +53,31 @@
 #include <string.h>
 #include <math.h>
 #include "conio.h"
-// Declaração das Bibliotecas de Funções de Integração
+// Declaracao das Bibliotecas de Funcoes de Integracao
+// Declaration of Integration Functions Libraries
 #include "integ_trapz.h"
 
-// Variável de DEBUG. ´1´ para imprimir mensagens de DEBUG
+// Variavel de DEBUG. Soh para imprimir mensagens de DEBUG
+// DEBUG variable
 #define DEBUG 1
 #define DEBUGCYCLES 5
 
-// Definição de Constantes
+// Definicao de Constantes
+// Constants definition
 #define PI 3.14159265358979
 
-// Definição de zero
+// Definicao de zero
+// ZERO definition
 #define ZERR 0.000001
 
-// Definição temporária de tamanhos aceitáveis de matrizes/vetores
-// Todas as definições de tamanho podem (e devem) ser trocadas
-// por alocação dinâmica de memória (malloc).
+// Definicao temporaria de tamanhos aceitaveis de matrizes/vetores
+// Todas as definicoes de tamanho podem (e devem) ser trocadas
+// por alocacao dinamica de memoria (malloc).
+
+// Temporary definition for acceptable sizes of matrices/vectors
+// All size definitions can (and must) be replaced 
+// by dynamic memory allocation (malloc).
+
 #define MAX 10
 #define MAXNODES 40
 #define MAXINPUTS 10
@@ -79,9 +88,14 @@
 #define MAXSTEPBUFFER 30
 #define TAMBUFFER 15
 
-// Definição dos tipos de blocos existentes.
-// Tais definições servem para o algoritmo saber
-// que tipo de bloco está presente em determinado nó.
+// Definicao dos tipos de blocos existentes.
+// Tais definicoes servem para o algoritmo saber
+// que tipo de bloco estah presente em determinado noh.
+
+// Definition of existing blocks
+// Such definitions are useful so that the algorithm knows
+// which kind of block is present in a certain node.
+
 #define TYPE_INPUT 1
 #define TYPE_OUTPUT 2
 #define TYPE_CONST 3
@@ -93,23 +107,28 @@
 #define TYPE_INV 9
 #define TYPE_MULTIPLY 10
 
-// Definição do tipo de integração a ser realizada pelo
+// Definicao do tipo de integracao a ser realizada pelo
 // bloco integrador.
+
+// Type of integration to be executed by
+// integrator block
 #define INTEGTYPE_RECT 1
 #define INTEGTYPE_TRAPZ 2
 
 // Abertura do arquivo de entrada de dados
+// Open input file
 FILE *arq;
 
 // Abertura do arquivo de resultados
+// Open output files
 FILE *resfile;
 FILE *dbg;
 
 // main
 void main (void) {
 
-	// vetor que armazena os nós existentes no sistema
-	// Este vetor não é ainda utilizado nesta versão.
+	// vetor que armazena os nohs existentes no sistema
+	// Este vetor nao eh ainda utilizado nesta versao.
 	int nodes[MAXNODES]; 
 	// matriz de valores de entrada. Utiliza o conceito de buffer circular.
 	// Este vetor atualiza a matriz de valores nodais a cada iteração.

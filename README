@@ -1,2 +1,4 @@
+To execute:
+
 gcc main.c conio.c -o main
 
